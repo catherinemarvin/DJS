@@ -1,8 +1,50 @@
 <html>
 <head>
-	<title>Hi</title>
+	<title>SO CLASSY</title>
+	
+	<script src="/nowjs/now.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			now.ready(function() {
+				addMedia = function () {
+					now.SaddMedia($('#addmedia').val(),["poop"]);
+				}
+				
+				findMedia = function () {
+					now.SfindMedia($('#findMedia').val(), function (results) {
+						$('#searchresults').empty();
+						results.map(displaySearchItem);
+					});
+				}
+				
+				now.playback = function(mediaInfo) {
+					$('#playingmedia').empty();
+					var toEmbed = "<iframe class='youtube-player' type='text/html' width='640' height='385' src='http://www.youtube.com/embed/"+mediaInfo.path+"?autoplay=1' frameborder='0'></iframe>"
+					$('#playingmedia').html(toEmbed);
+				}
+				
+				displaySearchItem = function (doc) {
+					mediaId = doc._id.toString(16);
+					//var arg = 'onclick=\\'now.SbroadcastMedia(\\'' + mediaId + '\\', 1)\\'';
+					//console.log(arg);
+					$('#searchresults').append("<div id='"+mediaId+"'>"+mediaId+"</div>");
+					$('#'+mediaId).click(function () {
+						now.SbroadcastMedia(mediaId);
+					});
+				}
+			});
+		}); 
+		
+	</script>
 </head>
 
 <body>
-	hue
+	<button onClick="addMedia()">Add Media</button><input type="text" id="addmedia" placeholder="link to video" />
+	<button onClick="findMedia()">Find Media</button><input type="text" id="findMedia" placeholder="search here">
+	
+	<div id="searchresults">RESULTS</div>
+	
+	<div id="playingmedia">Nothing yet</div>
 </body>

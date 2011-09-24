@@ -25,66 +25,67 @@ Note: Any arguments with * are optional
 #Bare Bones Server Side Functionality
 ------
 
-	dj.SbroadcastMedia(mId, *roomId)
+	now.SbroadcastMedia(mId, *roomId, callback)
 
-By default it tells all the clients to display whatever media is indicated by mId. Supplying the roomId will only display the media to users in that particular room. You must search for the mId you want using `SfindMedia`
+By default it tells all the clients to display whatever media is indicated by mId. Supplying the roomId will only display the media to users in that particular room. You must search for the mId you want using `SfindMedia`. The callback expects an argument `mediainfo`, which is a JSON object of this form. The callback has to be in the now space.
 
-	dj.SfindMedia(searchQuery)
+````javascript
+{
+	path: path_to_media
+	tags: [array, of, tags]
+}
+````
 
-Crawls the database for media with the searchQuery as part of the tag and passes the result to `now.CreceiveSearchResults`
+	now.SfindMedia(searchQuery, callback)
 
-	dj.SaddMedia(path, tags)
+Crawls the database for media with the searchQuery as part of the tag and passes the result to the callback function as an array of JSON objects of this form:
 
-Adds the media to the database. path is just the path to the media in question; tags is an array of strings.
+````javascript
+{ 
+	path: path_to_media
+	tags: [array, of, tags]
+}
+````
 
-	dj.SaddToRoom(roomId)
+	now.SaddMedia(path, tags, metadata)
+
+Adds the media to the database. path is just the path to the media in question; tags is an array of strings. Metadata is a JSON object of your choice!!!
+
+	now.SaddToRoom(roomId)
 
 Adds the user who calls this function to the room.
 
-	dj.SleaveRoom(*roomId)
+	now.SleaveRoom(*roomId)
 
 By default, has the user who calls this function leave all the rooms, including the `everyone` namespace (i.e. a logout). When called with a roomId as an argument, has the user leave just that room.
 
 #Groups Server Side Functionality
 -----
-	dj.SaddUser(uId)
+	now.SaddUser(uId)
 
 Adds a user into our personal database.
 
-	dj.SremoveUser(uId)
+	now.SremoveUser(uId)
 
 Removes a user from our personal database.
 
-	dj.SloginUser(uId)
+	now.SloginUser(uId)
 
 Logs a user out of our personal database.
 
-	dj.subscribeToGroup(uId, groupId)
+	now.subscribeToGroup(uId, groupId)
 
 Subscribes a user to a group.
 
-	dj.unsubscribeToGroup(uId, groupId)
+	now.unsubscribeToGroup(uId, groupId)
 
 Unsubscribes a user from a group.
 
 Inserts a user into our personal userdatabase.
 
-#Client Side Guide
-
-	now.CreceiveSearchResults(results)
-
-You need to write this. results is an array of JSON of this form:
-
-```javascript
-{
-	path:
-	tags:
-}
-``` 
 
 ##Quickest Start Guide
 1. Include the required stuff server side.
-2. Implement now.CreceiveSearchResults(result) client side.
 
 FAQ
 ------

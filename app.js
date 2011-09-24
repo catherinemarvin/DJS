@@ -1,12 +1,13 @@
 var express = require('express');
 var dj = require('djs');
 
+var nowjs = require('now');
+
+var djs
 
 server = express.createServer();
 
 dj.initialize(server);
-
-
 
 server.set('view options', {
 	layout: false
@@ -23,7 +24,7 @@ server.use(express.static(__dirname + '/static'));
 
 server.get('/', function(req, res){
 	
-  res.render("index");
+  res.render("porntable");
 });
 
 server.listen(80);
