@@ -1,4 +1,4 @@
 var initialize = function(args) {
- now.playback = args.playback
+	now.playback = args.playback
 }
 
