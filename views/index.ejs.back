@@ -1,0 +1,187 @@
+<!DOCTYPE HTML> 
+<html lang="en"> 
+<head> 
+<title>HERP CHAT</title> 
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/jquery.jplayer.min.js"></script>
+<link type="text/css" href="/skin/jplayer.blue.monday.css" rel="stylesheet"/>
+<script src="/nowjs/now.js"></script>
+<link rel="stylesheet" href="/master.css">
+<script>
+$(document).ready(function(){
+	now.giveData = function(cId, state) {
+		now.setSong(
+			cId, 
+			$("#jquery_jplayer_1").data("jPlayer").status.src, 
+			$("#jquery_jplayer_1").data("jPlayer").status.currentTime,
+			state
+		);
+	}
+	
+	now.reportSong = function() { 
+		now.songTest($("#jquery_jplayer_1").data("jPlayer").status.src, $("#jquery_jplayer_1").data("jPlayer").status.currentTime);
+	}
+
+	now.loadSong = function(songid, position, state) {
+		$("#jquery_jplayer_1").jPlayer("setMedia", { m4a: songid });
+		$("#jquery_jplayer_1").jPlayer( state, position);
+	}
+
+	now.onjoin = function(id, text){
+		var mydiv = $("<div></div>").attr("id", id).addClass("chat");
+		mydiv.hide();		
+		mydiv.appendTo($("#chatdiv"));
+		mydiv.text(text);
+		mydiv.slideDown(1000);
+	}
+	now.refreshtext = function(id, text) {
+		var div = $("#" + id);
+		div.append("<div class=\"textline\">" + text + "</div>");
+		div.animate({ scrollTop: div.attr("scrollHeight") }, 500);
+	}
+	
+	now.appendSong = function(text) {
+		var div = $("#songlistdiv");	
+		div.append("<div class=\"songline\">" + "<button type=\'button\' onclick=\"now.loadSong(\'\/play\/" + text + "\', 0, \'play\')\">" + text.split(".mp3")[0].split(".m4a")[0] + "</button></div>");
+		div.animate({ scrollTop: div.attr("scrollHeight") }, 500);
+	}
+	
+	now.appendQueue = function(text) {
+		var div = $("#queuebuttonsdiv");	
+		div.append("<div class=\"songline\">" + "<button type=\'button\' onclick=\"now.addToQueue(\'\/play\/" + text + "\')\">" + text + "</button></div>");
+		div.animate({ scrollTop: div.attr("scrollHeight") }, 500);
+	}
+	
+	now.displayQueueItem = function(uId, sId) {
+		var div = $("#queuediv");	
+		div.append("<h3>" + uId + ": " + sId + "</h3>");
+		div.animate({ scrollTop: div.attr("scrollHeight") }, 500);
+	}
+	
+	now.wipeSongDiv = function() {
+		$("#songlistdiv").empty();
+	}
+	
+	now.wipeQueueDiv = function() {
+		$("#queuediv").empty();
+	}
+	
+	now.ready(function(){
+		now.onclientload();
+		$("#jquery_jplayer_1").jPlayer({
+        	ready: function () {
+         	$(this).jPlayer("setMedia", {
+         		mp3: "/play/1.mp3",
+         		mp3: "/play/2.mp3",
+         		m4a: "/play/3.m4a"
+         	});
+       	},
+        	supplied: "mp3, m4a, oga",
+        	preload: "auto",
+        	volume: 1
+		});
+		$("#jquery_jplayer_1").bind($.jPlayer.event.play, function() { // Bind an event handler to the instance's play event.
+  			now.syncToMe("play"); // sync all other players to this one but play them.
+		});
+		$("#jquery_jplayer_1").bind($.jPlayer.event.pause, function() { // Bind an event handler to the instance's play event.
+  			now.syncToMe("pause"); // sync all other players to this one but pause them.
+		});
+		$("#jquery_jplayer_1").bind($.jPlayer.event.ended, function() { // Bind an event handler to the instance's play event.
+  			now.playNextSong(); // plays the next song, but checks to see if king. Only the king will tell everyone to change the song.
+		});
+		now.getSongList();
+		now.getQueueList();
+		now.getCurrentSong();
+	});
+
+	now.deleteUser = function(id){
+		$("#" + id).remove();
+	}
+
+	$("#box").keypress(function(e){
+		if(e.which == '13') {
+			now.appendtext($("#box").val());
+			$("#box").val("");		
+		}
+		
+	});
+});
+</script>
+
+
+<body>
+
+<div id="wrapper">
+	<div id="header">
+	NOWTABLE
+	</div>
+	<div id ="main">
+		<!--jplayer-->
+		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+			<div class="jp-audio">
+			<div class="jp-type-single">
+			<div id="jp_interface_1" class="jp-interface">
+				<ul class="jp-controls">
+					<li><a href="#" class="jp-play" tabindex="1">play</a></li>
+					<li><a href="#" class="jp-pause" tabindex="1">pause</a></li>
+					<li><a href="#" class="jp-stop" tabindex="1">stop</a></li>
+					<li><a href="#" class="jp-mute" tabindex="1">mute</a></li>
+					<li><a href="#" class="jp-unmute" tabindex="1">unmute</a></li>
+				</ul>
+				<div class="jp-progress">
+				  <div class="jp-seek-bar">
+					<div class="jp-play-bar"></div>
+				  </div>
+				</div>
+				<div class="jp-volume-bar">
+				  <div class="jp-volume-bar-value"></div>
+				</div>
+				<div class="jp-current-time"></div>
+				<div class="jp-duration"></div>
+			</div>
+			<div id="jp_playlist_1" class="jp-playlist">
+				<ul>
+					<li>DAT SONG</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--end jplayer-->
+		
+		<!--buttons-->
+	<div id="buttons">
+		<button type="button" onclick="now.becomeKing()">Become King</button>
+		<button type="button" onclick="now.getCurrentSong()">Sync</button>
+		<button type="button" onclick="now.bugTest()">Bug Test</button>
+	</div>
+		<!--end buttons-->
+	
+	<div class="clear"></div>
+	
+	<div id="chatdiv">
+		<input placeholder="Type your message ..." type="text" id="box">
+	</div>
+	<div id="stuff">
+		<h2>Queue o' Songs</h2>
+		<div id="queuediv"></div>
+		<h2>List o' Songs</h2>
+		<div id="songlistdiv"></div>
+		<h2>Add to Queue</h2>
+		<div id="queuebuttonsdiv"></div>
+		<div id="uploaddiv">haro, wanna upload something?<br>	
+			<form action="/upload" enctype="multipart/form-data" method="post">	
+				Title of the song: <input type="text" name="title" />	
+				<input type="file" name="song" /><br>
+				<input type="submit" value="Upload" />	
+			</form> 
+		</div>
+	</div>
+</div>
+	<div class="clear"></div>
+   	<div id="footer">copyright lololol</div>
+</div> 
+
+
+</body> 
+</html> 
