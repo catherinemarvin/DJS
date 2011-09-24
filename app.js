@@ -22,10 +22,13 @@ server.use(express.static(__dirname + '/static'));
 
 
 
-server.get('/', function(req, res){
-	
-  res.render("porntable");
+server.get('/', function (req, res){
+	res.render("splash");
 });
+
+server.get('/admin', function (req, res) {
+	res.render("porntable");
+})
 
 server.listen(80);
 console.log("Express server listening on port %d", server.address().port);
