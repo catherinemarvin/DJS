@@ -33,6 +33,7 @@ By default it tells all the clients to display whatever media is indicated by mI
 {
 	path: path_to_media
 	tags: [array, of, tags]
+	metadata: JSON of your choice
 }
 ````
 
@@ -44,6 +45,7 @@ Crawls the database for media with the searchQuery as part of the tag and passes
 { 
 	path: path_to_media
 	tags: [array, of, tags]
+	metadata: JSON of your choice
 }
 ````
 
@@ -83,9 +85,29 @@ Unsubscribes a user from a group.
 
 Inserts a user into our personal userdatabase.
 
+#Client Side Initialization
+
+1. Include d.js on the client side.
+2. Call initialize with a JSON object of this type:
+````javascript
+ initialize({
+	playback: playback(mediaInfo)
+})
+
+````
+playback is your own provided function that takes mediaInfo as an argument. mediaInfo is of this form:
+
+````javascript
+{ 
+	path: path_to_media
+	tags: [array, of, tags]
+	metadata: JSON of your choice
+}
+````
 
 ##Quickest Start Guide
-1. Include the required stuff server side.
+1. Include djs server side.
+2. Initialize the client stuff.
 
 FAQ
 ------

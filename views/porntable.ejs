@@ -4,9 +4,19 @@
 	
 	<script src="/nowjs/now.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-	
+	<script src="d.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			initialize({
+				
+				playback: function(mediaInfo) {
+					$('#playingmedia').empty();
+					var toEmbed = "<iframe class='youtube-player' type='text/html' width='640' height='385' src='http://www.youtube.com/embed/"+mediaInfo.path+"?autoplay=1' frameborder='0'></iframe>"
+					$('#playingmedia').html(toEmbed);
+				}
+			});
+			
 			now.ready(function() {
 				addMedia = function () {
 					now.SaddMedia($('#addmedia').val(),["poop"]);
@@ -17,12 +27,6 @@
 						$('#searchresults').empty();
 						results.map(displaySearchItem);
 					});
-				}
-				
-				now.playback = function(mediaInfo) {
-					$('#playingmedia').empty();
-					var toEmbed = "<iframe class='youtube-player' type='text/html' width='640' height='385' src='http://www.youtube.com/embed/"+mediaInfo.path+"?autoplay=1' frameborder='0'></iframe>"
-					$('#playingmedia').html(toEmbed);
 				}
 				
 				displaySearchItem = function (doc) {
