@@ -22,6 +22,7 @@ server.use(express.static(__dirname + '/static'));
 
 
 server.get('/', function(req, res){
+	
   res.render("index");
 });
 

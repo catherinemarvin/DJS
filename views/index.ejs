@@ -8,38 +8,56 @@
 	<script type="text/javascript">
 	
 	$(document).ready(function() {
-	
-		now.CplayMedia = function(mediaInfo) {
-			$('#picturediv').empty();
-			$('#picturediv').append('<img src="'+mediaInfo.path+'">')
-		}
-	
-		now.CreceiveSearchResults = function (results) {
-			$('#searchresults').empty();
-			results.map(displaySearchItem);
-		}
-	
-		broadcast = function () {
-			now.SbroadcastMedia("4e7d71f17331019105000001");
-		}
-	
-		addmedia = function () {
-			now.SaddMedia();
-		}
-	
-		displaySearchItem = function (doc) {
-			mediaId = doc._id.toString(16);
-			console.log(mediaId);
-			$('#searchresults').append('<span onclick=now.SbroadcastMedia("' + mediaId + '")>' + doc.path + '</span>');
-		}
-	
-		$('#filter').keyup(function () {
-			console.log("omgomgomgomg");
-			now.SfindMedia($(this).val());
-		});
 		
 		now.ready(function() {
+			now.CplayMedia = function(mediaInfo) {
+				$('#picturediv').empty();
+				$('#picturediv').append('<img src="'+mediaInfo.path+'">')
+			}
+
+			now.CreceiveSearchResults = function (results) {
+				$('#searchresults').empty();
+				results.map(displaySearchItem);
+			}
+
+			now.CcleanRegister = function () {
+				console.log("clean the register");
+			}
+
+			broadcast = function () {
+				now.SbroadcastMedia("4e7d71f17331019105000001");
+			}
+
+			addmedia = function () {
+				now.SaddMedia();
+			}
+
+			displaySearchItem = function (doc) {
+				mediaId = doc._id.toString(16);
+				//var arg = 'onclick=\\'now.SbroadcastMedia(\\'' + mediaId + '\\', 1)\\'';
+				//console.log(arg);
+				$('#searchresults').replaceWith("<div id='"+mediaId+"'>"+mediaId+"</div>");
+				$('#'+mediaId).click(function () {
+					now.SbroadcastMedia(mediaId, 1);
+				})
+			}
 			
+			leaveRoom = function () {
+				now.SleaveRoom(1);
+			}
+
+			$('#filter').keyup(function () {
+				now.SfindMedia($(this).val());
+			});
+			
+			addToRoom = function (roomId) {
+				now.SaddToRoom(roomId);
+				console.log("added");
+			}
+
+			addToRoom(1);
+			leaveRoom(1);
+			now.SgetCurrentMedia();
 		});
 	
 	});
@@ -60,4 +78,5 @@
 	
 	<button onClick="broadcast()">BROADCASTMEDIA</button>
 	<button onClick="addmedia()">ADDMEDIA</button>
+	<button onClick="now.StryRegister('herp','derp')">add account</button>
 </body>
