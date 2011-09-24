@@ -13,7 +13,8 @@
 				playback: function(mediaInfo) {
 					$('#playingmedia').empty();	
           $('#title').stop().animate({opacity: 0}, 500, function(){
-            $('#title').text(mediaInfo.metadeta.title).animate({opacity: 1}, 1000);
+            $('#title').text(mediaInfo.metadata.title).animate({opacity: 1}, 1000);
+            console.log(1);
           });
 					if (mediaInfo.metadata.t == 'video'){
 					var toEmbed = "<iframe class='youtube-player' type='text/html' width='640' height='385' src='http://www.youtube.com/embed/"+mediaInfo.path+"?autoplay=1' frameborder='0'></iframe>"
