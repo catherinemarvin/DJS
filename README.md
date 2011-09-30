@@ -55,25 +55,29 @@ Adds the media to the database. path is just the path to the media in question; 
 
 	now.SaddToRoom(roomId)
 
-Adds the user who calls this function to the room.
+Adds the user who calls this function to the room. If the room didn't exist before you made this call, you will create it. 
 
 	now.SleaveRoom(*roomId)
 
 By default, has the user who calls this function leave all the rooms, including the `everyone` namespace (i.e. a logout). When called with a roomId as an argument, has the user leave just that room.
 
+	now.Sapply(*roomId, callback)
+	
+By default, applies the callback function on all members of the `everyone` group, i.e. everybody who is on the server. Providing the optional `roomId` argument causes the callback to only be applied for members in the room.
+
 #Groups Server Side Functionality
 -----
 	now.SaddUser(uId)
 
-Adds a user into our personal database.
+If you wish to use our groups functionality then you must let us know about the users in your system. Call this when you add a user to your own DB. 
 
 	now.SremoveUser(uId)
 
-Removes a user from our personal database.
+Call this when you remove a user from your database. 
 
 	now.SloginUser(uId)
 
-Logs a user out of our personal database.
+Call this when a user logs in to your application. This will put him back into all the groups that he was subscribed to.
 
 	now.subscribeToGroup(uId, groupId)
 
@@ -83,7 +87,7 @@ Subscribes a user to a group.
 
 Unsubscribes a user from a group.
 
-Inserts a user into our personal userdatabase.
+Keep in mind that these are different from NowJS groups because these groups will persist beyond client log-in and log-out. 
 
 #Client Side Initialization
 
@@ -94,7 +98,6 @@ Inserts a user into our personal userdatabase.
 	playback: playback(mediaInfo)
 })
 
-````
 playback is your own provided function that takes mediaInfo as an argument. mediaInfo is of this form:
 
 ````javascript
