@@ -44,6 +44,12 @@
 					});
 				}
 				
+				now.testApply = function(arg1, arg2) {
+					console.log(arg1 + arg2)
+				}
+
+
+								
 				displaySearchItem = function (doc) {
 					var mediaId = doc._id.toString(16);
 					var	mediaTitle = doc.metadata.title
@@ -52,6 +58,8 @@
 						now.SbroadcastMedia(mediaId);
 					});
 				}
+				console.log("about to call Sapply")
+				now.Sapply("testApply", ["Hello", "World"])
 			});
 		}); 
 	</script>
