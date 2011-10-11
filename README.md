@@ -61,7 +61,7 @@ Adds the user who calls this function to the room. If the room didn't exist befo
 
 By default, has the user who calls this function leave all the rooms, including the `everyone` namespace (i.e. a logout). When called with a roomId as an argument, has the user leave just that room.
 
-	now.Sapply(*roomId, callback)
+	now.Sapply(functionName, *args, *roomId)
 	
 By default, applies the callback function on all members of the `everyone` group, i.e. everybody who is on the server. Providing the optional `roomId` argument causes the callback to only be applied for members in the room.
 
@@ -78,6 +78,10 @@ Call this when you remove a user from your database.
 	now.SloginUser(uId)
 
 Call this when a user logs in to your application. This will put him back into all the groups that he was subscribed to.
+
+	now.SlogoutUser(uId)
+
+Call this when a user logs out of your application. This will remove him from the groups that he was subscribed to but we will remember to put him back in those groups when he logs back in.
 
 	now.subscribeToGroup(uId, groupId)
 
@@ -111,6 +115,7 @@ playback is your own provided function that takes mediaInfo as an argument. medi
 ##Quickest Start Guide
 1. Include djs server side.
 2. Initialize the client stuff.
+3. Be super productive.
 
 FAQ
 ------
