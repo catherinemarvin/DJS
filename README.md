@@ -5,7 +5,7 @@
 Install from npm
 ----------------
 
-`npm install djs` or `npm install djs -g` for a global installation.
+`npm install djs` or `npm install djs -g` for a global installation. You may have to also `npm install mongodb`.
 
 DJS is a Node.JS module built on top of Now and MongoDB.
 
