@@ -1,0 +1,21 @@
+How do I use this example???
+
+Fire up app.js and navigate to two pages on two tabs:
+
+1. localhost/: This is the client splash page.
+2. localhost/admin: This is where you control the media distribution. The three boxes run as follows:
+  a: link to media source. This can be:
+    1. The HTML for embedding a Soundcloud song on your page.
+    2. A direct link to an image 
+    3. A link to an HTML5 YouTube video.
+  b: A tag for the audio type. Can be:
+    1. mp3
+    2. pic
+    3. video
+  c: A search term so you can find the media.
+
+On the admin page there is also a search bar where you can search for items by keywords.
+
+You can also just click "Find Media" to find all the media you have stored in your database.
+
+Simply click on whatever appears in the "RESULTS" div to play the media, which will show up both on the admin page and on the client page.
