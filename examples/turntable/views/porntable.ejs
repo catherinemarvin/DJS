@@ -55,11 +55,13 @@
 			addMedia = function () {
 				now.SaddMedia($('#addmedia').val(), [ ], 
 				{
-					title: $('#mediaTitle').val()	
+					title: $('#mediaTitle').val(),
+					type: $('#mediaType').val()	
 				});
 
 				$('#addmedia').val("");
 				$('#mediaTitle').val("");
+				$('#mediaType').val("");
 
 			};
 
@@ -116,6 +118,7 @@
 
 <button onClick="addMedia()">Add Media</button><input type="text" id="addmedia" placeholder="Direct link to song" />
 <input type="text" id="mediaTitle" placeholder="Title here">
+<input type="text" id="mediaType" placeholder="pic, mp3">
 
 <button onClick="findMedia()">Find Media</button>
 
