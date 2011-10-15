@@ -2,12 +2,12 @@
 
 <a href="https://github.com/khwang/DJS">Check out the github</a>
 
-Install from npm (doesn't actually work yet)
+Install from npm
 ----------------
 
 `npm install djs` or `npm install djs -g` for a global installation.
 
-DJS is a Node.JS module built on top of Now and MongoDB
+DJS is a Node.JS module built on top of Now and MongoDB.
 
 ##Public API
 
@@ -132,6 +132,12 @@ A: It's because we've had trouble in the past writing code that utilized NowJS. 
 **Q**: What's the difference between rooms and groups?
 
 A: Rooms don't persist. If the server goes down, or the client disconnects, the client won't return to rooms they were connected to. Groups will persist. 
+
+**Q**: What's up with your strange numbering scheme? Why does it start
+at 0.0.2?
+
+A: 0.0.0 was us claiming "djs" as a unique package name and 0.0.1 was us
+publishing something broken accidentally. 
 
 Further Information
 ------------
