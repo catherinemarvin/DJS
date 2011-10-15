@@ -11,6 +11,10 @@
   "engines": {
     "node": "~v0.4.10"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express" : ">= 1.2.0",
+    "now" : ">= 0.7.0"
+    "mongodb" : ">= 0.9.0"
+    "ejs" : ">= 0.4.0"},
   "devDependencies": {}
 }
