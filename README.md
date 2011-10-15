@@ -63,7 +63,7 @@ By default, has the user who calls this function leave all the rooms, including 
 
 	now.Sapply(functionName, *args, *roomId)
 	
-By default, applies the callback function on all members of the `everyone` group, i.e. everybody who is on the server. Providing the optional `roomId` argument causes the callback to only be applied for members in the room.
+By default, applies the callback function on all members of the `everyone` group, i.e. everybody who is on the server. Providing the optional `roomId` argument causes the callback to only be applied for members in the room. Note that the callback function must be in the now pocketspace.
 
 #Groups Server Side Functionality
 -----
@@ -75,9 +75,11 @@ If you wish to use our groups functionality then you must let us know about the 
 
 Call this when you remove a user from your database. 
 
-	now.SloginUser(uId)
+	now.SloginUser(uId, *callback, *args)
 
-Call this when a user logs in to your application. This will put him back into all the groups that he was subscribed to.
+Call this when a user logs in to your application. This will put him back into all the groups that he was subscribed to. Optionally, you can have a callback be called after a user is logged out. Note that if you wish to provide arguments they must be an array of arguments to your callback. Also note that your callback function must be in the `everyone.now` pocketspace. 
+
+The reason the callback is necessary is that login performs a database operation and so if you were to call Sapply on any group the user is logged in, the user won't receive the function since the user won't be added to the group for a while as database operations are expensive.
 
 	now.SlogoutUser(uId)
 

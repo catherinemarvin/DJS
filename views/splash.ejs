@@ -58,8 +58,24 @@
 						now.SbroadcastMedia(mediaId);
 					});
 				}
+				/*
 				console.log("about to call Sapply")
 				now.Sapply("testApply", ["Hello", "World"])
+				now.SaddToRoom(1)
+				now.Sapply("testApply", ["Hell", "World"], 1)
+				now.Sapply("testApply", ["You Done", "Goofed"], 2)
+				now.SaddToRoom(2)
+				now.Sapply("testApply", ["Hello", "Worl"], 2)
+				*/
+
+				console.log("i am testing groups")
+				//now.SaddUser(1)
+				now.SloginUser(1, "Sapply", ["testApply", ["herp", "derp"], "cats" ])
+				now.unsubscribeFromGroup(1, "cats")
+				//now.SlogoutUser(1,"Sapply", ["testApply", ["log", "out"], "cats"] )
+				//now.subscribeToGroup(1, "cats")
+				//now.SlogoutUser(1)
+				now.Sapply("testApply", ["love","kitties"], "cats")
 			});
 		}); 
 	</script>
