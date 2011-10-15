@@ -87,11 +87,11 @@ Call this when a user logs out of your application. This will remove him from th
 
 	now.subscribeToGroup(uId, groupId)
 
-Subscribes a user to a group.
+Subscribes a user to a group, and adds him to the group.
 
 	now.unsubscribeToGroup(uId, groupId)
 
-Unsubscribes a user from a group.
+Unsubscribes a user from a group, and removes him from the group.
 
 Keep in mind that these are different from NowJS groups because these groups will persist beyond client log-in and log-out. 
 
@@ -128,6 +128,10 @@ A: No, he actually only deleted half of it.
 **Q**: What's up with the strange naming scheme? I don't like the C's and S's in front of your function names.
 
 A: It's because we've had trouble in the past writing code that utilized NowJS. Since it blurred the client server borders, we often got confused about whether functions were server-side or client-side, so to save us (and hopefully you!) from headaches we decided to do this.
+
+**Q**: What's the difference between rooms and groups?
+
+A: Rooms don't persist. If the server goes down, or the client disconnects, the client won't return to rooms they were connected to. Groups will persist. 
 
 Further Information
 ------------
