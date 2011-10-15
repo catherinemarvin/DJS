@@ -9,6 +9,8 @@
 
 	<script type="text/javascript" src="/js/jquery.jplayer.min.js"></script>
 
+	<link rel="stylesheet" type="text/css" href="master.css">
+
 	<script src="d.js"></script>
 	
 
@@ -50,6 +52,7 @@
 				$('#'+mediaId).click(function () {
 					now.SbroadcastMedia(mediaId);
 				});
+
 			}
 
 	    });
@@ -108,10 +111,13 @@
       </div>
     </div>
   </div>
+  <hr size=1>
 
-  <button onClick="findMedia()">Find Media</button>
+  <a href="#" class="button" onclick="findMedia()">Find Media</a>
+  <br>
+  <br>
   <div id="searchresults">Search results here</div>
-
+<hr size=2>
   <div id="numConTitle">Number of people connected:</div>
   <div id="numberConnected">0</div>
 </body>

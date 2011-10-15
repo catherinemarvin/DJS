@@ -1,10 +1,10 @@
 @font-face { font-family: Nice; src: url('nice.otf'); } 
 
 body {
-	background: #222;
-	color: #FFFFFF;
-	text-align:center;
-	margin:0 auto;
+  background: #222;
+  color: #FFFFFF;
+  text-align:center;
+  margin:0 auto;
 }
 
 #title {
