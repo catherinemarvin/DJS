@@ -1,12 +1,15 @@
 var express = require('express');
 var dj = require('../../d');
-//var nowjs = require('now');
-
-var djs
+var nowjs = require('now');
 
 server = express.createServer();
 
-dj.initialize(server);
+var everyone = nowjs.initialize(server, {socketio:{"log level": process.argv[2]}});
+
+
+server = express.createServer();
+
+dj.initialize(server, nowjs, everyone);
 
 server.set('view options', {
 	layout: false
