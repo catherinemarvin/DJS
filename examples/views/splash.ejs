@@ -1,0 +1,88 @@
+<html>
+<head>
+	<title>SO CLASSY</title>
+	
+	<script src="/nowjs/now.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="d.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="master.css">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			initialize({	
+				playback: function(mediaInfo) {
+					$('#playingmedia').empty();	
+          $('#title').stop().animate({opacity: 0}, 500, function(){
+            $('#title').text(mediaInfo.metadata.title).animate({opacity: 1}, 1000);
+          });
+					if (mediaInfo.metadata.t == 'video'){
+					var toEmbed = "<iframe class='youtube-player' type='text/html' width='640' height='385' src='http://www.youtube.com/embed/"+mediaInfo.path+"?autoplay=1' frameborder='0'></iframe>"
+					$('#playingmedia').html(toEmbed);
+				}
+					if (mediaInfo.metadata.t == 'pic'){
+						$('#playingmedia').html('<img src="'+mediaInfo.path+'">')
+					}
+					if(mediaInfo.metadata.t == 'mp3'){
+						$('#playingmedia').html(mediaInfo.path);	
+					}
+				}
+			});
+		
+			now.ready(function() {
+				addMedia = function () {
+					now.SaddMedia($('#addmedia').val(), [ ], 
+					{
+						t: $('#mediatype').val(),
+						title: $('#mediaTitle').val()	
+					});
+				};
+				
+				findMedia = function () {
+					now.SfindMedia($('#findMedia').val(), function (results) {
+						$('#searchresults').empty();
+						results.map(displaySearchItem);
+					});
+				}
+				
+				now.testApply = function(arg1, arg2) {
+					console.log(arg1 + arg2)
+				}
+
+
+								
+				displaySearchItem = function (doc) {
+					var mediaId = doc._id.toString(16);
+					var	mediaTitle = doc.metadata.title
+					$('#searchresults').append("<div id='"+mediaId+"'>"+mediaTitle+"</div>");
+					$('#'+mediaId).click(function () {
+						now.SbroadcastMedia(mediaId);
+					});
+				}
+				/*
+				console.log("about to call Sapply")
+				now.Sapply("testApply", ["Hello", "World"])
+				now.SaddToRoom(1)
+				now.Sapply("testApply", ["Hell", "World"], 1)
+				now.Sapply("testApply", ["You Done", "Goofed"], 2)
+				now.SaddToRoom(2)
+				now.Sapply("testApply", ["Hello", "Worl"], 2)
+				*/
+
+				console.log("i am testing groups")
+				//now.SaddUser(1)
+				now.SloginUser(1, "Sapply", ["testApply", ["herp", "derp"], "cats" ])
+				now.unsubscribeFromGroup(1, "cats")
+				//now.SlogoutUser(1,"Sapply", ["testApply", ["log", "out"], "cats"] )
+				//now.subscribeToGroup(1, "cats")
+				//now.SlogoutUser(1)
+				now.Sapply("testApply", ["love","kitties"], "cats")
+			});
+		}); 
+	</script>
+</head>
+
+<body>
+  <a href="http://github.com/khwang/DJS"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/4c7dc970b89fd04b81c8e221ba88ff99a06c6b61/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub"></a>
+  <div id="title"></div>
+	<div id="playingmedia"></div>
+</body>

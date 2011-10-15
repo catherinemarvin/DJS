@@ -1,0 +1,16 @@
+{
+  "author": "Kevin Hwang <k3vinhwang@gmail.com> (kevinhwang.net)",
+  "name": "djs",
+  "description": "A media sharing framework",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/khwang/DJS.git"
+  },
+  "main": "d",
+  "engines": {
+    "node": "~v0.4.10"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
