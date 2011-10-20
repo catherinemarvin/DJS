@@ -9,7 +9,7 @@
   },
   "main": "d",
   "engines": {
-    "node": "~v0.4.10"
+    "node": "~> v0.4.10"
   },
   "dependencies": {
     "express" : ">= 1.2.0",
