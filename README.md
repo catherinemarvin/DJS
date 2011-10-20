@@ -2,12 +2,18 @@
 
 <a href="https://github.com/khwang/DJS">Check out the github</a>
 
+<a href="http://www.soncoya.com">Also check out our live demo of an example product</a>! Open with two browser tabs for maximum effect.
+
+##What is DJS?
+
+DJS is a Node.JS module built on top of Now and MongoDB. It is a media distribution framework. Simply spin up a Node server and plug DJS in and serve up all sorts of media in real-time with no server-side Javascript necessary. Media can mean anything from YouTube videos, pictures, and even webpages. We also support a public subscription model and groups, for discriminating customers.
+
 Install from npm
 ----------------
 
 `npm install djs` or `npm install djs -g` for a global installation. You may have to also `npm install mongodb`.
 
-DJS is a Node.JS module built on top of Now and MongoDB.
+
 
 ##Public API
 
@@ -101,10 +107,12 @@ Keep in mind that these are different from NowJS groups because these groups wil
 
 1. Include dclient.js on the client side.
 2. Call initialize with a JSON object of this type:
+
 ````javascript
  initialize({
 	playback: playback(mediaInfo)
 })
+````
 
 playback is your own provided function that takes mediaInfo as an argument. mediaInfo is of this form:
 
@@ -116,9 +124,9 @@ playback is your own provided function that takes mediaInfo as an argument. medi
 }
 ````
 
-##Quickest Start Guide
+##Quickest Start Guide (tl;dr)
 1. Include djs server side.
-2. Initialize the client stuff.
+2. Initialize the client playback function.
 3. Be super productive.
 
 FAQ
@@ -139,8 +147,8 @@ A: Rooms don't persist. If the server goes down, or the client disconnects, the 
 at 0.0.2?
 
 A: 0.0.0 was us claiming "djs" as a unique package name and 0.0.1 was us
-publishing something broken accidentally. 
+publishing something broken accidentally. Yes we realize we could have unpublished on npm but starting at 0.0.2 also lets us give the impression that we've already iterated once through a design cycle.
 
 Further Information
 ------------
-Rainbow Dash is the best pony <3
+We have two examples at the moment. They're both incredibly hacky, but they were also built in about 30 minutes from scratch each, which includes all the wayward Facebook browsing. Information on how to run them is included in READMEs present in each example folder.
