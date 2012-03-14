@@ -6,9 +6,6 @@ server = express.createServer();
 
 var everyone = nowjs.initialize(server, {socketio:{"log level": process.argv[2]}});
 
-
-server = express.createServer();
-
 dj.initialize(server, nowjs, everyone);
 
 server.set('view options', {
