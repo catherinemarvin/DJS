@@ -2,7 +2,6 @@
 
 <a href="https://github.com/khwang/DJS">Check out the github</a>
 
-<a href="http://www.soncoya.com">Also check out our live demo of an example product</a>! Open with two browser tabs for maximum effect.
 
 ##What is DJS?
 
